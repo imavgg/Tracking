@@ -18,9 +18,9 @@
 4. roslaunch lidar_cluster final_tracking.launch.
 
 ## Feature 
-1. lidar cluster: initialize, lidar RANSAC, clustering, 3d Bounding box.
-2. Yolo: label, 2d bounding box
-3. Tracking: Data Association
+Lidar cluster: Initialize, lidar RANSAC, 3D Bounding box.
+Yolo: label, 2D bounding box
+Tracking: Data Association
 
 ## Video
 https://youtu.be/QvvLt-RX1DI
