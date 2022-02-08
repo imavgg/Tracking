@@ -1,0 +1,9 @@
+<launch>
+	<param name ="/use_sim_time" value="true"/>
+	
+	<include file="/home/an/test_ws/src/darknet_ros/darknet_ros/launch/darknet_ros.launch"/>
+	<node pkg="rviz" type="rviz" args="-d $(find lidar_cluster)/rviz/tracking.rviz" name="rviz"/>
+    	<node pkg="lidar_cluster" type="lidar_cluster_3dbox" output="screen" name="lidar_cluster_3dbox"/>
+	<node pkg="multi_object_tracking_lidar" type="kf_tracker" output="screen" name="kf_tracker"/>	
+	<node pkg="rosbag" type="play" name="tracking_bag" args="/home/an/test_ws/src/Tracking_01/lidar_cluster/bag/tracking_3.bag -r 0.05 --clock"/>
+</launch>

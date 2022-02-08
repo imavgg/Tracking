@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- Console launch prefix -->
+  <arg name="launch_prefix" default=""/>
+
+  <!-- Config and weights folder. -->
+  <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
+  <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
+
+  <!-- ROS and network parameter files -->
+  <arg name="ros_param_file"             default="$(find darknet_ros)/config/ros.yaml"/>
+  <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov2-tiny.yaml"/>
+
+  <!-- Load parameters -->
+  <rosparam command="load" ns="darknet_ros" file="$(arg ros_param_file)"/>
+  <rosparam command="load" ns="darknet_ros" file="$(arg network_param_file)"/>
+
+  <!-- Start darknet and ros wrapper -->
+<!--    <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen" launch-prefix="$(arg launch_prefix)">  -->
+  <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" launch-prefix="$(arg launch_prefix)">
+	<param name="weights_path"          value="$(arg yolo_weights_path)" />
+	<param name="config_path"           value="$(arg yolo_config_path)" />
+  </node>
+
+<!--this is for bag2 and bag3	-->
+	<node name="republish" type="republish" pkg="image_transport" output="screen" 	args="compressed in:=/zed/left/image_raw_color raw out:=/camera/rgb/image_raw" />	
+
+<!--this is for bag1
+	<node name="republish" type="republish" pkg="image_transport" output="screen" 	args="compressed in:=/zed/left/image_rect_color raw out:=/camera/rgb/image_raw" />-->
+</launch>
