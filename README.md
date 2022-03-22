@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Tracking
-=======
 # Lidar and camera traffic tracking
 
 ## System
